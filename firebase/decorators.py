@@ -12,9 +12,9 @@ def http_connection(timeout):
             if not ('connection' in kwargs) or not kwargs['connection']:
                 connection = requests.Session()
                 kwargs['connection'] = connection
+                connection.timeout = timeout
             else:
                 connection = kwargs['connection']
-            connection.timeout = timeout
             connection.headers.update({'Content-type': 'application/json'})
             return f(*args, **kwargs)
         return wraps(f)(wrapped)
